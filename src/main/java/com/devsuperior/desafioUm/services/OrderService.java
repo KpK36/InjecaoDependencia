@@ -1,17 +1,13 @@
 package com.devsuperior.desafioUm.services;
 
 import com.devsuperior.desafioUm.entities.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
-
-    private ShippingService shippingService;
-
-    public OrderService (ShippingService shippingService){
-
-        this.shippingService = shippingService;
-    }
+    @Autowired
+    ShippingService shippingService;
 
     public double total (Order order) {
 

@@ -2,7 +2,7 @@ package com.devsuperior.desafioUm;
 
 import com.devsuperior.desafioUm.entities.Order;
 import com.devsuperior.desafioUm.services.OrderService;
-import com.devsuperior.desafioUm.services.ShippingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +13,9 @@ import java.util.Scanner;
 @SpringBootApplication
 public class DesafioUmApplication implements CommandLineRunner {
 
+	@Autowired
+	OrderService orderService;
+
 	public static void main(String[] args) {
 		SpringApplication.run(DesafioUmApplication.class, args);
 	}
@@ -20,15 +23,11 @@ public class DesafioUmApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		int flag = 0;
+		int flag;
 		do{
 
 			System.out.println("Servidor no ar!");
 			Order order = new Order();
-
-			ShippingService shippingService = new ShippingService();
-
-			OrderService orderService = new OrderService(shippingService);
 
 			Locale.setDefault(Locale.US);
 			Scanner scanner = new Scanner(System.in);
@@ -48,8 +47,7 @@ public class DesafioUmApplication implements CommandLineRunner {
 
 			System.out.println(orderService.total(order));
 
-			System.out.println("Deseja continuar a execução ?" + "\nAperte NÚMERO tecla para SIM"
-			+ "\nAperte 1 para NÃO");
+			System.out.println("Deseja continuar a execução ?\nAperte NÚMERO tecla para SIM\nAperte 1 para NÃO");
 			flag = scanner.nextInt();
 			scanner.close();
 
